@@ -1,0 +1,27 @@
+package solutions
+
+import (
+	"fmt"
+
+	y2022 "aoc/solutions/2022"
+)
+
+var solvers = map[int]map[int]DaySolver{
+	2022: {
+		1: &y2022.Day1{},
+	},
+}
+
+type DaySolver interface {
+	SolvePartOne(string) string
+	SolvePartTwo(string) string
+}
+
+func GetDaySolver(year int, day int) (DaySolver, error) {
+	if yearMap, exists := solvers[year]; exists {
+		if solver, exists := yearMap[day]; exists {
+			return solver, nil
+		}
+	}
+	return nil, fmt.Errorf("no solver found for year %d, day %d", year, day)
+}
