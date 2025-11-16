@@ -9,6 +9,7 @@ import (
 var solvers = map[int]map[int]DaySolver{
 	2022: {
 		1: &y2022.Day1{},
+		2: &y2022.Day2{},
 	},
 }
 

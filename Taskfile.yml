@@ -1,0 +1,65 @@
+version: '3'
+
+vars:
+  YEAR: '{{.YEAR}}'
+  DAY: '{{.DAY}}'
+
+tasks:
+  create-day:
+    cmds:
+      - mkdir -p solutions/{{.YEAR}}
+      - |
+        cat > solutions/{{.YEAR}}/day{{.DAY}}.go <<'EOF'
+        package y{{.YEAR}}
+
+        type Day{{.DAY}} struct{}
+
+        func (*Day{{.DAY}}) SolvePartOne(input string) string {
+        	return ""
+        }
+
+        func (*Day{{.DAY}}) SolvePartTwo(input string) string {
+        	return ""
+        }
+        EOF
+      - |
+        cat > solutions/{{.YEAR}}/day{{.DAY}}_test.go <<'EOF'
+        package y{{.YEAR}}
+
+        import "testing"
+
+        func TestDay{{.DAY}}Part1Sample(t *testing.T) {
+        	sample := `
+        	000
+        	000
+        	000
+        	`
+        	expected := "111"
+        	result := (&Day{{.DAY}}{}).SolvePartOne(sample)
+
+        	if result != expected {
+        		t.Errorf("Part 1: expected %s, got %s", expected, result)
+        	}
+        }
+
+        func TestDay{{.DAY}}Part2Sample(t *testing.T) {
+
+        	sample := `
+        	000
+        	000
+        	000
+        	`
+        	expected := "111"
+        	result := (&Day{{.DAY}}{}).SolvePartTwo(sample)
+
+        	if result != expected {
+        		t.Errorf("Part 2: expected %s, got %s", expected, result)
+        	}
+        }
+        EOF
+      - echo "Created solutions/{{.YEAR}}/day{{.DAY}}.go and solutions/{{.YEAR}}/day{{.DAY}}_test.go"
+      - echo "Don't forget to update solutions/registry.go to register the new solver!"
+    preconditions:
+      - sh: test -n "{{.DAY}}"
+        msg: "DAY is required. Usage: task create-day YEAR=2022 DAY=3"
+    silent: false
