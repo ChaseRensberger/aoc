@@ -4,11 +4,11 @@ import "testing"
 
 func TestDay2Part1Sample(t *testing.T) {
 	sample := `
-	000
-	000
-	000
+	A Y
+	B X
+	C Z
 	`
-	expected := "111"
+	expected := "15"
 	result := (&Day2{}).SolvePartOne(sample)
 
 	if result != expected {
