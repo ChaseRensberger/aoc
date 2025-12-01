@@ -4,12 +4,16 @@ import (
 	"fmt"
 
 	y2022 "aoc/solutions/2022"
+	y2025 "aoc/solutions/2025"
 )
 
 var solvers = map[int]map[int]DaySolver{
 	2022: {
 		1: &y2022.Day1{},
 		2: &y2022.Day2{},
+	},
+	2025: {
+		1: &y2025.Day1{},
 	},
 }
 
