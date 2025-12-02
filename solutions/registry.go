@@ -14,6 +14,7 @@ var solvers = map[int]map[int]DaySolver{
 	},
 	2025: {
 		1: &y2025.Day1{},
+		2: &y2025.Day2{},
 	},
 }
 
