@@ -3,6 +3,7 @@ package y2025
 import (
 	// "container/heap"
 	// "sort"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -96,6 +97,29 @@ func (*Day3) SolvePartOne(input string) string {
 	return strconv.Itoa(ans)
 }
 
+func getLargestWithEnoughLeft(bank string, left int) int {
+	if left < 0 {
+		return 0
+	}
+	currLargest := -1
+	currLargestIdx := -1
+	for i, battery := range bank[:len(bank)-left] {
+		if runeToInt(battery) > currLargest {
+			currLargest = runeToInt(battery)
+			currLargestIdx = i
+		}
+	}
+	return currLargest*(int(math.Pow10(left))) + getLargestWithEnoughLeft(bank[currLargestIdx+1:], left-1)
+}
+
 func (*Day3) SolvePartTwo(input string) string {
-	return ""
+	banks := strings.Split(strings.TrimSpace(input), "\n")
+	ans := 0
+	for _, bank := range banks {
+		res := getLargestWithEnoughLeft(bank, 11)
+		// fmt.Printf("result: %v\n", res)
+		ans += res
+	}
+
+	return strconv.Itoa(ans)
 }

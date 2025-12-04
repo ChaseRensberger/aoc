@@ -17,7 +17,8 @@ func TestDay3Part1Sample(t *testing.T) {
 }
 
 func TestDay3Part2Sample(t *testing.T) {
-	expected := "357"
+	expected := "3121910778619"
+
 	result := (&Day3{}).SolvePartTwo(day3Sample)
 
 	if result != expected {
