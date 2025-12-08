@@ -23,10 +23,22 @@ func TestDay5Part1Sample(t *testing.T) {
 	}
 }
 
+var day5ExtraSample = `1-2
+1-2
+`
+
 func TestDay5Part2Sample(t *testing.T) {
-	expected := "53"
+	expected := "14"
 
 	result := (&Day5{}).SolvePartTwo(day5Sample)
+
+	if result != expected {
+		t.Errorf("Part 2: expected %s, got %s", expected, result)
+	}
+
+	expected = "2"
+
+	result = (&Day5{}).SolvePartTwo(day5ExtraSample)
 
 	if result != expected {
 		t.Errorf("Part 2: expected %s, got %s", expected, result)
